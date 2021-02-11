@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="resize.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-head">
+        <div class="head-wrap"><h3 class="logo">Reduce Your Image</h3></div>
+      </div>
+      <div class="content">
+        <div class="content_row">
+          <h2>Reduce an Image</h2>
+          <p id="para">
+            Resize JPG, PNG, GIF or BMP images online, selecting the new image's
+            size and quality. This way you will get lighter images, easier to
+            upload to websites, send by e-mail or share with friends.
+          </p>
+        </div>
+        <div class="drop_container" onclick="getaccess()">
+          <div class="content_row2">
+            <img src="ico-frame-upload.png" class="icon" alt="image" />
+            <p class="drop">Drop your image here!</p>
+            <input
+              type="file"
+              name="select image"
+              id="file"
+              onchange="Showimage(event)"
+            />
+          </div>
+          <div class="content_row3">
+            <div class="imgcontainer">
+              <img id="image" class="image" width="100px" height="57px" />
+            </div>
+            <div id="filename"></div>
+            <div id="dimension"></div>
+            <div id="filesize"></div>
+          </div>
+          <span id="button">select image</span>
+        </div>
+        <i
+          class="fa fa-times"
+          id="closebtn"
+          onclick="closeme()"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+  </body>
+  <script>
+    function getaccess() {
+      console.log("get");
+      document.getElementById("file").click();
+    }
+    function Showimage(event) {
+      var file = document.getElementById("file");
+      var row2 = document.getElementsByClassName("content_row2")[0];
+      var row3 = document.getElementsByClassName("content_row3")[0];
+      if (file) {
+        row2.style.display = "none";
+        row3.style.display = "block";
+        document.getElementById("closebtn").style.display = "block";
+      } else {
+        row2.style.display = "flex";
+        row3.style.display = "none";
+        document.getElementById("closebtn").style.display = "none";
+      }
+      var image = document.getElementById("image");
+      console.log("content");
+      image.src = URL.createObjectURL(event.target.files[0]);
+      console.log(event);
+      image.onload = function () {
+        var width = image.naturalWidth;
+        var height = image.naturalHeight;
+        document.getElementById("dimension").innerHTML =
+          width + " " + "X" + " " + height;
+        console.log({ image, a: image.naturalWidth, b: image.naturalHeight });
+      };
+      var filename = document.getElementById("file").files[0].name;
+      document.getElementById("filename").innerHTML = filename;
+      var filesize = document.getElementById("file").files[0].size;
+      var files = (filesize / 1024).toFixed(2);
+      document.getElementById("filesize").innerHTML = files + "kb";
+    }
+    function closeme() {
+      var row2 = document.getElementsByClassName("content_row2")[0];
+      var row3 = document.getElementsByClassName("content_row3")[0];
+      var close = document.getElementById("closebtn");
+      if (close) {
+        console.log("close");
+        row2.style.display = "flex";
+        row3.style.display = "none";
+        document.getElementById("closebtn").style.display = "none";
+        document.getElementById("file").value = "";
+      } else {
+        row2.style.display = "none";
+        row3.style.display = "flex";
+        document.getElementById("closebtn").style.display = "block";
+      }
+    }
+  </script>
+</html>
