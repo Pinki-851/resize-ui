@@ -118,6 +118,7 @@ h2 {
   font-weight: 400;
   letter-spacing: 1px;
   cursor: pointer;
+  white-space: nowrap;
 }
 #button {
   font-size: 17px;
