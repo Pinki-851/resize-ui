@@ -58,57 +58,57 @@
         ></i>
       </div>
     </div>
+    <script>
+      function getaccess() {
+        console.log("get");
+        document.getElementById("file").click();
+      }
+      function Showimage(event) {
+        var file = document.getElementById("file");
+        var row2 = document.getElementsByClassName("content_row2")[0];
+        var row3 = document.getElementsByClassName("content_row3")[0];
+        if (file) {
+          row2.style.display = "none";
+          row3.style.display = "block";
+          document.getElementById("closebtn").style.display = "block";
+        } else {
+          row2.style.display = "flex";
+          row3.style.display = "none";
+          document.getElementById("closebtn").style.display = "none";
+        }
+        var image = document.getElementById("image");
+        console.log("content");
+        image.src = URL.createObjectURL(event.target.files[0]);
+        console.log(event);
+        image.onload = function () {
+          var width = image.naturalWidth;
+          var height = image.naturalHeight;
+          document.getElementById("dimension").innerHTML =
+            width + " " + "X" + " " + height;
+          console.log({ image, a: image.naturalWidth, b: image.naturalHeight });
+        };
+        var filename = document.getElementById("file").files[0].name;
+        document.getElementById("filename").innerHTML = filename;
+        var filesize = document.getElementById("file").files[0].size;
+        var files = (filesize / 1024).toFixed(2);
+        document.getElementById("filesize").innerHTML = files + "kb";
+      }
+      function closeme() {
+        var row2 = document.getElementsByClassName("content_row2")[0];
+        var row3 = document.getElementsByClassName("content_row3")[0];
+        var close = document.getElementById("closebtn");
+        if (close) {
+          console.log("close");
+          row2.style.display = "flex";
+          row3.style.display = "none";
+          document.getElementById("closebtn").style.display = "none";
+          document.getElementById("file").value = "";
+        } else {
+          row2.style.display = "none";
+          row3.style.display = "flex";
+          document.getElementById("closebtn").style.display = "block";
+        }
+      }
+    </script>
   </body>
-  <script>
-    function getaccess() {
-      console.log("get");
-      document.getElementById("file").click();
-    }
-    function Showimage(event) {
-      var file = document.getElementById("file");
-      var row2 = document.getElementsByClassName("content_row2")[0];
-      var row3 = document.getElementsByClassName("content_row3")[0];
-      if (file) {
-        row2.style.display = "none";
-        row3.style.display = "block";
-        document.getElementById("closebtn").style.display = "block";
-      } else {
-        row2.style.display = "flex";
-        row3.style.display = "none";
-        document.getElementById("closebtn").style.display = "none";
-      }
-      var image = document.getElementById("image");
-      console.log("content");
-      image.src = URL.createObjectURL(event.target.files[0]);
-      console.log(event);
-      image.onload = function () {
-        var width = image.naturalWidth;
-        var height = image.naturalHeight;
-        document.getElementById("dimension").innerHTML =
-          width + " " + "X" + " " + height;
-        console.log({ image, a: image.naturalWidth, b: image.naturalHeight });
-      };
-      var filename = document.getElementById("file").files[0].name;
-      document.getElementById("filename").innerHTML = filename;
-      var filesize = document.getElementById("file").files[0].size;
-      var files = (filesize / 1024).toFixed(2);
-      document.getElementById("filesize").innerHTML = files + "kb";
-    }
-    function closeme() {
-      var row2 = document.getElementsByClassName("content_row2")[0];
-      var row3 = document.getElementsByClassName("content_row3")[0];
-      var close = document.getElementById("closebtn");
-      if (close) {
-        console.log("close");
-        row2.style.display = "flex";
-        row3.style.display = "none";
-        document.getElementById("closebtn").style.display = "none";
-        document.getElementById("file").value = "";
-      } else {
-        row2.style.display = "none";
-        row3.style.display = "flex";
-        document.getElementById("closebtn").style.display = "block";
-      }
-    }
-  </script>
 </html>
